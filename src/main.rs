@@ -92,7 +92,12 @@ struct Person {
 }
 
 fn match_bindings() {
-
+    let name = "Steve".to_string();
+    let x: Option<Person> = Some(Person { name: Some(name) });
+    match x {
+        Some(Person { name: ref a @ Some(_), .. }) => println!("{:?}", a),
+        _ => {}
+    }
 }
 
 fn main() {
@@ -115,4 +120,5 @@ fn main() {
 
     food_kind();
     range_match();
+    match_bindings()
 }
