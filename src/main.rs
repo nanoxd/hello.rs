@@ -57,6 +57,24 @@ fn sum_vec(v: &Vec<i32>) -> i32 {
     v.iter().fold(0, |a, &b| a + b)
 }
 
+// Lifetimes
+struct Food<'a> {
+    kind: &'a str
+}
+
+impl<'a> Food<'a> {
+    fn kind(&self) -> &'a str {
+        self.kind
+    }
+}
+
+fn food_kind() {
+    let kind = "Beans";
+    let food = Food { kind: &kind };
+
+    println!("You have {}", food.kind());
+}
+
 fn main() {
     println!("Hello, World!");
     let x = add_one(12);
@@ -74,4 +92,6 @@ fn main() {
     let numbers = vec![1, 2, 3];
     let total_number = sum_vec(&numbers);
     println!("Total is {}", total_number);
+
+    food_kind()
 }
