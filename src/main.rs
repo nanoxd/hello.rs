@@ -12,6 +12,14 @@ fn point_me(to: String) -> String {
     to
 }
 
+fn array_fun() {
+    let array = [1, 2, 3];
+    println!("Array has {} elements", array.len());
+
+    let strings = ["Ronnie Ray", "All Day", "Na Na"];
+    println!("Who sings that song? {}", strings[0]);
+}
+
 fn main() {
     println!("Hello, World!");
     let x = add_one(12);
@@ -20,4 +28,6 @@ fn main() {
     let function = point_me;
     let string = String::from("Here");
     function(string);
+
+    array_fun();
 }
