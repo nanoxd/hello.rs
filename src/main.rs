@@ -8,9 +8,16 @@ fn add_one(n: i32) -> i32 {
     // Return is implied on last line, similar to Ruby
 }
 
+fn point_me(to: String) -> String {
+    to
+}
+
 fn main() {
     println!("Hello, World!");
     let x = add_one(12);
     println!("add_one to 12 is: {}", x);
-    print_number(32)
+    print_number(32);
+    let function = point_me;
+    let string = String::new();
+    function(string);
 }
