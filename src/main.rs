@@ -22,15 +22,14 @@ fn array_fun() {
 
 fn will_it_divide() {
     let mut x = 7; // mut x: i32
-    let mut done = false; // mut done: bool
 
-    while !done {
+    loop {
         x += x - 3;
 
         println!("{}", x);
 
         if x % 5 == 0 {
-            done = true;
+            break;
         }
     }
 }
