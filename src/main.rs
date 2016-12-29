@@ -18,6 +18,6 @@ fn main() {
     println!("add_one to 12 is: {}", x);
     print_number(32);
     let function = point_me;
-    let string = String::new();
+    let string = String::from("Here");
     function(string);
 }
