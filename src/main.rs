@@ -41,6 +41,10 @@ fn vectors() {
     // let another_index: i32 = 1;
 
     println!("Number is: {}", vector[index]);
+    match vector.get(5) {
+        Some(x) => println!("Item at {} is {}", 5, x),
+        None => println!("Sorry, the vector is too small", )
+    }
 }
 
 fn main() {
