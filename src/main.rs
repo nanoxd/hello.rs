@@ -34,6 +34,15 @@ fn will_it_divide() {
     }
 }
 
+fn vectors() {
+    let vector = vec![1, 2, 3, 4, 5];
+
+    let index: usize = 0;
+    // let another_index: i32 = 1;
+
+    println!("Number is: {}", vector[index]);
+}
+
 fn main() {
     println!("Hello, World!");
     let x = add_one(12);
@@ -45,4 +54,5 @@ fn main() {
 
     array_fun();
     will_it_divide();
+    vectors()
 }
