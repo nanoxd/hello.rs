@@ -20,6 +20,21 @@ fn array_fun() {
     println!("Who sings that song? {}", strings[0]);
 }
 
+fn will_it_divide() {
+    let mut x = 7; // mut x: i32
+    let mut done = false; // mut done: bool
+
+    while !done {
+        x += x - 3;
+
+        println!("{}", x);
+
+        if x % 5 == 0 {
+            done = true;
+        }
+    }
+}
+
 fn main() {
     println!("Hello, World!");
     let x = add_one(12);
@@ -30,4 +45,5 @@ fn main() {
     function(string);
 
     array_fun();
+    will_it_divide();
 }
