@@ -47,6 +47,12 @@ fn vectors() {
     }
 }
 
+fn ownership() {
+    let v = vec![1, 2, 3];
+
+    let v2 = v; // Accessing v will now cause an error
+}
+
 fn main() {
     println!("Hello, World!");
     let x = add_one(12);
@@ -58,5 +64,6 @@ fn main() {
 
     array_fun();
     will_it_divide();
-    vectors()
+    vectors();
+    ownership();
 }
