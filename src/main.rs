@@ -53,6 +53,10 @@ fn ownership() {
     let v2 = v; // Accessing v will now cause an error
 }
 
+fn sum_vec(v: &Vec<i32>) -> i32 {
+    v.iter().fold(0, |a, &b| a + b)
+}
+
 fn main() {
     println!("Hello, World!");
     let x = add_one(12);
@@ -66,4 +70,8 @@ fn main() {
     will_it_divide();
     vectors();
     ownership();
+
+    let numbers = vec![1, 2, 3];
+    let total_number = sum_vec(&numbers);
+    println!("Total is {}", total_number);
 }
