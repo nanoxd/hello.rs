@@ -75,6 +75,26 @@ fn food_kind() {
     println!("You have {}", food.kind());
 }
 
+// Match/Patterns
+
+fn range_match() {
+    let x = 2;
+
+    match x {
+        1 ... 5 => println!("X is in 1-5"),
+        _ => println!("lol")
+    }
+}
+
+#[derive(Debug)]
+struct Person {
+    name: Option<String>,
+}
+
+fn match_bindings() {
+
+}
+
 fn main() {
     println!("Hello, World!");
     let x = add_one(12);
@@ -93,5 +113,6 @@ fn main() {
     let total_number = sum_vec(&numbers);
     println!("Total is {}", total_number);
 
-    food_kind()
+    food_kind();
+    range_match();
 }
