@@ -116,6 +116,10 @@ impl Circle {
     fn perimeter(&self) -> f64 {
         2.0 * std::f64::consts::PI * self.radius
     }
+
+    fn grow(&self, increment: f64) -> Circle {
+        Circle { x: self.x, y: self.y, radius: self.radius + increment }
+    }
 }
 
 fn main() {
@@ -143,4 +147,7 @@ fn main() {
     let c = Circle { x: 0.0, y: 0.0, radius: 2.0 };
     println!("Circle's area: {}", c.area());
     println!("Circle's perimeter: {}", c.perimeter());
+
+    let other_circle = c.grow(3.0).area();
+    println!("{}", other_circle);
 }
