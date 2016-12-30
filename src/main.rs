@@ -1,6 +1,7 @@
 mod trait_objects;
 
 use trait_objects::Dog;
+use trait_objects::Bark;
 use trait_objects::make_noise;
 
 fn print_number(x: i32) {
@@ -200,5 +201,6 @@ fn main() {
     traits_on_generic_structs();
 
     let dog = Dog { breed: "chihuahua".to_string() };
-    println!("{:?}", make_noise(dog));
+    let noise = make_noise(&dog as &Bark);
+    println!("{:?}", noise);
 }

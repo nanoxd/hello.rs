@@ -24,6 +24,6 @@ impl Bark for Wolf {
     }
 }
 
-pub fn make_noise<T: Bark>(x: T) {
+pub fn make_noise(x: &Bark) {
     x.bark();
 }
