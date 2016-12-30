@@ -110,16 +110,20 @@ struct Circle {
 
 trait HasArea {
     fn area(&self) -> f64;
+    fn is_larger(&self, &Self) -> bool;
 }
 
 impl HasArea for Circle {
     fn area(&self) -> f64 {
         std::f64::consts::PI * (self.radius * self.radius)
     }
+
+    fn is_larger(&self, other: &Self) -> bool {
+        self.area() > other.area()
+    }
 }
 
 impl Circle {
-
     fn perimeter(&self) -> f64 {
         2.0 * std::f64::consts::PI * self.radius
     }
@@ -134,8 +138,9 @@ fn methods() {
     println!("Circle's area: {}", c.area());
     println!("Circle's perimeter: {}", c.perimeter());
 
-    let other_circle = c.grow(3.0).area();
-    println!("{}", other_circle);
+
+    let other_circle = c.grow(3.0);
+    println!("Circle 1 is bigger than Circle 2: {}", c.is_larger(&other_circle));
 }
 
 fn main() {
