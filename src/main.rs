@@ -100,6 +100,24 @@ fn match_bindings() {
     }
 }
 
+// Methods
+
+struct Circle {
+    x: f64,
+    y: f64,
+    radius: f64,
+}
+
+impl Circle {
+    fn area(&self) -> f64 {
+        std::f64::consts::PI * (self.radius * self.radius)
+    }
+
+    fn perimeter(&self) -> f64 {
+        2.0 * std::f64::consts::PI * self.radius
+    }
+}
+
 fn main() {
     println!("Hello, World!");
     let x = add_one(12);
@@ -120,5 +138,9 @@ fn main() {
 
     food_kind();
     range_match();
-    match_bindings()
+    match_bindings();
+
+    let c = Circle { x: 0.0, y: 0.0, radius: 2.0 };
+    println!("Circle's area: {}", c.area());
+    println!("Circle's perimeter: {}", c.perimeter());
 }
