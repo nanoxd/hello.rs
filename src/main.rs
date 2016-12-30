@@ -122,6 +122,15 @@ impl Circle {
     }
 }
 
+fn methods() {
+    let c = Circle { x: 0.0, y: 0.0, radius: 2.0 };
+    println!("Circle's area: {}", c.area());
+    println!("Circle's perimeter: {}", c.perimeter());
+
+    let other_circle = c.grow(3.0).area();
+    println!("{}", other_circle);
+}
+
 fn main() {
     println!("Hello, World!");
     let x = add_one(12);
@@ -143,11 +152,5 @@ fn main() {
     food_kind();
     range_match();
     match_bindings();
-
-    let c = Circle { x: 0.0, y: 0.0, radius: 2.0 };
-    println!("Circle's area: {}", c.area());
-    println!("Circle's perimeter: {}", c.perimeter());
-
-    let other_circle = c.grow(3.0).area();
-    println!("{}", other_circle);
+    methods();
 }
