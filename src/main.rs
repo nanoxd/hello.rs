@@ -108,10 +108,17 @@ struct Circle {
     radius: f64,
 }
 
-impl Circle {
+trait HasArea {
+    fn area(&self) -> f64;
+}
+
+impl HasArea for Circle {
     fn area(&self) -> f64 {
         std::f64::consts::PI * (self.radius * self.radius)
     }
+}
+
+impl Circle {
 
     fn perimeter(&self) -> f64 {
         2.0 * std::f64::consts::PI * self.radius
