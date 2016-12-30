@@ -1,3 +1,8 @@
+mod trait_objects;
+
+use trait_objects::Dog;
+use trait_objects::make_noise;
+
 fn print_number(x: i32) {
     println!("x is: {}", x);
 }
@@ -192,5 +197,8 @@ fn main() {
     range_match();
     match_bindings();
     methods();
-    traits_on_generic_structs()
+    traits_on_generic_structs();
+
+    let dog = Dog { breed: "chihuahua".to_string() };
+    println!("{:?}", make_noise(dog));
 }
