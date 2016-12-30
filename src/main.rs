@@ -133,6 +133,19 @@ impl Circle {
     }
 }
 
+struct Rectangle<T> {
+    x: T,
+    y: T,
+    width: T,
+    height: T,
+}
+
+impl<T: PartialEq> Rectangle<T> {
+    fn is_square(&self) -> bool {
+        self.width == self.height
+    }
+}
+
 fn methods() {
     let c = Circle { x: 0.0, y: 0.0, radius: 2.0 };
     println!("Circle's area: {}", c.area());
@@ -141,6 +154,20 @@ fn methods() {
 
     let other_circle = c.grow(3.0);
     println!("Circle 1 is bigger than Circle 2: {}", c.is_larger(&other_circle));
+}
+
+fn traits_on_generic_structs() {
+    let mut r = Rectangle {
+        x: 0,
+        y: 0,
+        width: 47,
+        height: 47,
+    };
+
+    assert!(r.is_square());
+
+    r.height = 42;
+    assert!(!r.is_square());
 }
 
 fn main() {
@@ -165,4 +192,5 @@ fn main() {
     range_match();
     match_bindings();
     methods();
+    traits_on_generic_structs()
 }
