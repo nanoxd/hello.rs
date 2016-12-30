@@ -1,3 +1,4 @@
+mod closures;
 mod trait_objects;
 
 use trait_objects::Dog;
@@ -203,4 +204,6 @@ fn main() {
     let dog = Dog { breed: "chihuahua".to_string() };
     let noise = make_noise(&dog as &Bark);
     println!("{:?}", noise);
+
+    closures::main()
 }
