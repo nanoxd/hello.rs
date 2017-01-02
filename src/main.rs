@@ -209,24 +209,24 @@ fn file_double<P: AsRef<Path>>(file_path: P) -> Result<i32, CliError> {
     Ok(2 * n)
 }
 
-fn file_double_try<P: AsRef<Path>>(file_path: P) -> Result<i32, String> {
+fn file_double_try<P: AsRef<Path>>(file_path: P) -> Result<i32, CliError> {
     let mut file = try!(
         File::open(file_path)
-            .map_err(|e| e.to_string())
+            .map_err(CliError::Io)
     );
 
     let mut contents = String::new();
     try!(
         file
             .read_to_string(&mut contents)
-            .map_err(|e| e.to_string())
+            .map_err(CliError::Io)
     );
 
     let n = try!(
         contents
             .trim()
             .parse::<i32>()
-            .map_err(|e| e.to_string())
+            .map_err(CliError::Parse)
     );
 
     Ok(2 * n)
@@ -263,6 +263,11 @@ fn main() {
     closures::main();
 
     match file_double("num") {
+        Ok(n)    => println!("{}", n),
+        Err(err) => println!("{:?}", err),
+    }
+
+    match file_double_try("num") {
         Ok(n)    => println!("{}", n),
         Err(err) => println!("{:?}", err),
     }
