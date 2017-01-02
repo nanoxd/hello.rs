@@ -189,21 +189,21 @@ fn traits_on_generic_structs() {
     assert!(!r.is_square());
 }
 
-fn file_double<P: AsRef<Path>>(file_path: P) -> Result<i32, String> {
+fn file_double<P: AsRef<Path>>(file_path: P) -> Result<i32, CliError> {
     let mut file = match File::open(file_path) {
         Ok(file) => file,
-        Err(err) => return Err(err.to_string()),
+        Err(err) => return Err(CliError::Io(err)),
     };
 
     let mut contents = String::new();
 
     if let Err(err) = file.read_to_string(&mut contents) {
-        return Err(err.to_string());
+        return Err(CliError::Io(err));
     }
 
     let n: i32 = match contents.trim().parse() {
         Ok(n)    => n,
-        Err(err) => return Err(err.to_string()),
+        Err(err) => return Err(CliError::Parse(err)),
     };
 
     Ok(2 * n)
@@ -262,8 +262,8 @@ fn main() {
 
     closures::main();
 
-    match file_double_try("num") {
+    match file_double("num") {
         Ok(n)    => println!("{}", n),
-        Err(err) => println!("{}", err),
+        Err(err) => println!("{:?}", err),
     }
 }
