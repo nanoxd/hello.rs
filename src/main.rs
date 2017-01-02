@@ -5,6 +5,10 @@ use trait_objects::Dog;
 use trait_objects::Bark;
 use trait_objects::make_noise;
 
+use std::fs::File;
+use std::io::Read;
+use std::path::Path;
+
 fn print_number(x: i32) {
     println!("x is: {}", x);
 }
@@ -177,6 +181,26 @@ fn traits_on_generic_structs() {
     assert!(!r.is_square());
 }
 
+fn file_double<P: AsRef<Path>>(file_path: P) -> Result<i32, String> {
+    let mut file = match File::open(file_path) {
+        Ok(file) => file,
+        Err(err) => return Err(err.to_string()),
+    };
+
+    let mut contents = String::new();
+
+    if let Err(err) = file.read_to_string(&mut contents) {
+        return Err(err.to_string());
+    }
+
+    let n: i32 = match contents.trim().parse() {
+        Ok(n)    => n,
+        Err(err) => return Err(err.to_string()),
+    };
+
+    Ok(2 * n)
+}
+
 fn main() {
     println!("Hello, World!");
     let x = add_one(12);
@@ -205,5 +229,10 @@ fn main() {
     let noise = make_noise(&dog as &Bark);
     println!("{:?}", noise);
 
-    closures::main()
+    closures::main();
+
+    match file_double("num") {
+        Ok(n)    => println!("{}", n),
+        Err(err) => println!("{}", err),
+    }
 }
