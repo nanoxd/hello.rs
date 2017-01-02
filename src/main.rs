@@ -10,6 +10,8 @@ use std::io::Read;
 use std::path::Path;
 use std::io;
 use std::num;
+use std::error;
+use std::fmt;
 
 #[derive(Debug)]
 enum CliError {
@@ -25,6 +27,31 @@ fn add_one(n: i32) -> i32 {
     n + 1
     // Lack of semicolon on returns
     // Return is implied on last line, similar to Ruby
+}
+
+impl fmt::Display for CliError {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        match *self {
+            CliError::Io(ref err) => write!(f, "IO error: {}", err),
+            CliError::Parse(ref err) => write!(f, "Parse error: {}", err),
+        }
+    }
+}
+
+impl error::Error for CliError {
+    fn description(&self) -> &str {
+        match *self {
+            CliError::Io(ref err) => err.description(),
+            CliError::Parse(ref err) => err.description(),
+        }
+    }
+
+    fn cause(&self) -> Option<&error::Error> {
+        match *self {
+            CliError::Io(ref err) => Some(err),
+            CliError::Parse(ref err) => Some(err),
+        }
+    }
 }
 
 fn point_me(to: String) -> String {
@@ -210,10 +237,7 @@ fn file_double<P: AsRef<Path>>(file_path: P) -> Result<i32, CliError> {
 }
 
 fn file_double_try<P: AsRef<Path>>(file_path: P) -> Result<i32, CliError> {
-    let mut file = try!(
-        File::open(file_path)
-            .map_err(CliError::Io)
-    );
+    let mut file = try!(File::open(file_path).map_err(CliError::Io));
 
     let mut contents = String::new();
     try!(
