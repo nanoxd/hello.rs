@@ -8,6 +8,14 @@ use trait_objects::make_noise;
 use std::fs::File;
 use std::io::Read;
 use std::path::Path;
+use std::io;
+use std::num;
+
+#[derive(Debug)]
+enum CliError {
+    Io(io::Error),
+    Parse(num::ParseIntError),
+}
 
 fn print_number(x: i32) {
     println!("x is: {}", x);
